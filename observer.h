@@ -69,4 +69,3 @@ class Listener
 };
 
 #endif  // OBSERVER_H_
-
