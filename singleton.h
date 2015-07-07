@@ -1,3 +1,10 @@
+//
+//  singleton.h
+//
+//  Created by Taras Lushney on 6/31/14.
+//  Copyright (c) 2014 Taras Lushney. All rights reserved.
+//
+
 #ifndef SINGLETON_H_
 #define SINGLETON_H_
 
@@ -15,16 +22,15 @@ class Singleton {
         }, std::forward<Args>(args)...);
       return *instance_.get();
     }
- 
- protected:
-	 explicit Singleton<T>() = default;
 
-    ~Singleton<T>() = default;
+private:
+    Singleton() = default;
+    ~Singleton() = default;
 
  private:
-	Singleton<T>(const Singleton<T>&) = delete;
+    Singleton<T>(const Singleton<T>&) = delete;
 	
-	const Singleton<T>& operator=(const Singleton<T>&) = delete;
+    const Singleton<T>& operator=(const Singleton<T>&) = delete;
  
     static std::once_flag& once_flag() {
         static std::once_flag once;
@@ -34,6 +40,7 @@ class Singleton {
     static std::unique_ptr<T> instance_;
 };
  
-template<class T> std::unique_ptr<T> Singleton<T>::instance_ = nullptr;
+template<class T>
+std::unique_ptr<T> Singleton<T>::instance_ = nullptr;
  
 #endif

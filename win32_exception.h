@@ -16,7 +16,7 @@ class Win32Exception
     : public RuntimeException<Win32Exception, DWORD> {
  public:
     Win32Exception(const std::string& message, DWORD error)
-        : RuntimeException(message, error) {
+            : RuntimeException(message, error) {
     }
 
     static std::string ErrorMessage(DWORD error) {
