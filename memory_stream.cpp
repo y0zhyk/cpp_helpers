@@ -5,11 +5,11 @@
 //  Copyright (c) 2015 Taras Lushney. All rights reserved.
 //
 
-#include "./memory_stream.h"
-
 #include <sstream>
 #include <iterator>
 #include <iomanip>
+
+#include "./memory_stream.h"
 
 namespace core {
 

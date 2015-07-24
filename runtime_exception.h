@@ -17,7 +17,7 @@ class RuntimeException
  public:
     typedef T ErrorType;
 
-    RuntimeException(const std::string& message, ErrorType error)
+    RuntimeException(const char* message, ErrorType error)
         : std::runtime_error(FormatErrorMessage(message, error))
         , error_(error) {
     }
@@ -27,9 +27,9 @@ class RuntimeException
     }
 
  private:
-    static std::string FormatErrorMessage(const std::string& message, ErrorType error) {
+    static std::string FormatErrorMessage(const char* message, ErrorType error) {
         std::stringstream error_message;
-        error_message << message << " (" << Derived::ErrorMessage(error) << ")";
+        error_message << message << " (Error: " << error << ") : " << Derived::ErrorMessage(error);
         return error_message.str();
     }
 
@@ -38,7 +38,7 @@ class RuntimeException
 
 
 template<typename ExceptionType>
-void ThrowRuntimeExceptionIf(bool expression, const std::string& message, typename ExceptionType::ErrorType error) {
+void ThrowRuntimeExceptionIf(bool expression, const char* message, typename ExceptionType::ErrorType error) {
     if (expression)
         throw ExceptionType(message, error);
 }

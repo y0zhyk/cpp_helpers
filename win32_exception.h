@@ -10,28 +10,26 @@
 #include <windows.h>
 #include <string>
 
-#include "./runtime_exception.h"
+#include "runtime_exception.h"
 
 class Win32Exception
     : public RuntimeException<Win32Exception, DWORD> {
  public:
-    Win32Exception(const std::string& message, DWORD error)
+    Win32Exception(const char* message, DWORD error)
             : RuntimeException(message, error) {
     }
 
     static std::string ErrorMessage(DWORD error) {
-        std::stringstream error_message;
-        error_message << error;
-        return error_message.str();
+        return win32_api::GetErrorString(error);
     }
 };
 
-void ThrowLastError(const std::string& message) {
-    throw Win32Exception(message, ::GetLastError());
+void ThrowLastError(const char* message, DWORD error = ::GetLastError()) {
+    throw Win32Exception(message, error);
 }
 
-void ThrowLastErrorIf(bool expression, const std::string& message) {
-    ThrowRuntimeExceptionIf<Win32Exception>(expression, message, ::GetLastError());
+void ThrowLastErrorIf(bool expression, const char* message, DWORD error = ::GetLastError()) {
+    ThrowRuntimeExceptionIf<Win32Exception>(expression, message, error);
 }
 
 #endif  // WIN32_EXCEPTION_H_

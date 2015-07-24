@@ -1,9 +1,13 @@
+#include "./uuid.h"
+
+/*
+#include <sstream>
 
 class UuidImpl {
  public:
     virtual std::string ToString() const = 0;
     virtual bool IsShort() const = 0;
-}
+};
 
 class ShortUuid
     : public UuidImpl {
@@ -34,3 +38,5 @@ class LongUuid
 
     boost::uuids::uuid value_;
 }
+
+*/

@@ -9,10 +9,14 @@
 #define WIN32_API_H_
 
 #include <windows.h>
+#include <string>
 
 namespace win32_api {
     // Closes an open object handle.
     void CloseHandle(HANDLE handle);
+
+    // Obtains error message string for the system error codes
+    std::string GetErrorString(DWORD error);
 
 };  // namespace win32_api
 

@@ -11,7 +11,7 @@
 #include <string>
 #include <type_traits>
 
-#include "./blob.h"
+#include "blob.h"
 
 namespace core {
 

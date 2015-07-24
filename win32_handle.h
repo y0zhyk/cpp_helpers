@@ -8,10 +8,10 @@
 #ifndef WIN32_HANDLE_H_
 #define WIN32_HANDLE_H_
 
-#include <Windows.h>
+#include <windows.h>
 
-#include "./handle.h"
-#include "./win32_api.h"
+#include "handle.h"
+#include "win32_api.h"
 
 struct Win32HandleTraits {
     static HANDLE Invalid() noexcept {
@@ -26,3 +26,4 @@ struct Win32HandleTraits {
 using Win32Handle = Handle<HANDLE, Win32HandleTraits>;
 
 #endif  // WIN32_HANDLE_H_
+

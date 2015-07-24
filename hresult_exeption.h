@@ -16,21 +16,18 @@
 class HResultException
     : public RuntimeException<HResultException, HRESULT> {
  public:
-    HResultException(const std::string& message, HRESULT error)
+    HResultException(const char* message, HRESULT error)
             : RuntimeException(message, error) {
     }
 
     static std::string ErrorMessage(HRESULT error) {
-        #ifdef _UNICODE
-            return utils_string::WStringToString(_com_error(error).ErrorMessage());
-        #else
-            return _com_error(error).ErrorMessage();
-        #endif // _UNICODE 
+        std::basic_string<TCHAR> error_message = _com_error(error).ErrorMessage();
+        return std::string(std::begin(error_message), std::end(error_message));
     }
 };
 
 
-void ThrowIfHResultFailed(HRESULT hr, const std::string& message) {
+void ThrowIfHResultFailed(HRESULT hr, const char* message) {
     ThrowRuntimeExceptionIf<HResultException>(FAILED(hr), message, hr);
 }
 

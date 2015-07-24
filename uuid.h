@@ -8,6 +8,8 @@
 #ifndef UUID_H_
 #define UUID_H_
 
+#include <string>
+/*
 class Uuid {
  public:
     explicit Uuid(bool is_short = false);
@@ -36,5 +38,5 @@ class Uuid {
 inline std::string Uuid::ToString() const {
     impl_->ToString();
 }
-
+*/
 #endif  // UUID_H_
