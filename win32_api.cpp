@@ -21,7 +21,7 @@ std::string GetErrorString(DWORD error) {
 
     char* buffer = nullptr;
     const size_t size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
-        nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPSTR>(&buffer), 0, nullptr);
+            nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPSTR>(&buffer), 0, nullptr);
     ThrowLastErrorIf(size == 0, "Function ::FormatMessage() has been failed");
     std::string result(buffer, size);
     ThrowLastErrorIf(::LocalFree(buffer) != NULL, "Function ::LocalFree() has been failed");

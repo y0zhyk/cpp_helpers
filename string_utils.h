@@ -13,14 +13,19 @@
 
 namespace utils_string {
 
-using wstring_to_string_convert = std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>>;
-
-std::wstring StringToWString(const std::string& str) {
-    return wstring_to_string_convert().from_bytes(str);
+template<typename T>
+std::string ToMultiByteString(const std::basic_string<T>& str) {
+	using convert = std::wstring_convert<std::codecvt<T, char, std::mbstate_t>, T>;
+	return convert().to_bytes(str);
 }
 
-std::string WStringToString(const std::wstring& str) {
-    return wstring_to_string_convert().to_bytes(str);
+std::wstring ToWideString(const std::string& str) {
+	using convert = std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>>;
+	return convert().from_bytes(str);
+}
+
+std::wstring ToWideString(const std::wstring& str) {
+	return str;
 }
 
 };  // namespace utils_string

@@ -11,6 +11,7 @@
 #include <string>
 #include <type_traits>
 
+#include "byte.h"
 #include "blob.h"
 
 namespace core {
@@ -38,6 +39,8 @@ class MemoryStream {
 
     // Returns a string that represents the stream.
     std::string ToString() const noexcept;
+
+    static MemoryStream FromBlob(const Blob& blob);
 
     MemoryStream& operator << (const MemoryStream& ms);
     MemoryStream& operator >> (MemoryStream& ms);

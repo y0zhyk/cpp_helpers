@@ -9,9 +9,10 @@
 
 #include <vector>
 
+#include "byte.h"
+
 namespace core {
 
-typedef unsigned char Byte;
 typedef std::vector<Byte> Blob;
 
 }  // namespace core

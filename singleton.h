@@ -23,7 +23,7 @@ class Singleton {
       return *instance_.get();
     }
 
-private:
+ private:
     Singleton() = default;
     ~Singleton() = default;
 

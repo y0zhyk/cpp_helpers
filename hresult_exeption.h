@@ -7,11 +7,13 @@
 #ifndef HRESULT_EXCEPTION_H_
 #define HRESULT_EXCEPTION_H_
 
-#include <comdef.h>
 #include <string>
+#include <comdef.h>
 
 #include "runtime_exception.h"
 #include "string_utils.h"
+
+
 
 class HResultException
     : public RuntimeException<HResultException, HRESULT> {
