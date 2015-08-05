@@ -12,6 +12,7 @@
 namespace core {
 
 typedef std::uint8_t Byte;
+typedef std::vector<Byte> Bytes;
 
 }  // namespace core
 

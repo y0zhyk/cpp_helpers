@@ -33,7 +33,7 @@ const Byte* MemoryStream::data() const noexcept {
     return data_.data();
 }
 
-const Blob& MemoryStream::blob() const noexcept {
+const Bytes& MemoryStream::bytes() const noexcept {
     return data_;
 }
 
@@ -96,17 +96,17 @@ MemoryStream& MemoryStream::operator >> (MemoryStream& ms) {
     return *this;
 }
 
-MemoryStream& operator << (MemoryStream& ms, const Blob& blob) {
-    ms << blob.size();
-    ms.Write(blob.data(), blob.size());
+MemoryStream& operator << (MemoryStream& ms, const Bytes& bytes) {
+    ms << bytes.size();
+    ms.Write(bytes.data(), bytes.size());
     return ms;
 }
 
-MemoryStream& operator >> (MemoryStream& ms, Blob& blob) {
+MemoryStream& operator >> (MemoryStream& ms, Bytes& bytes) {
     size_t size = 0;
     ms >> size;
-    blob.resize(size);
-    ms.Read(blob.data(), blob.size());
+    bytes.resize(size);
+    ms.Read(bytes.data(), bytes.size());
     return ms;
 }
 
