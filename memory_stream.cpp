@@ -76,7 +76,7 @@ void MemoryStream::Clear() noexcept {
 std::string MemoryStream::ToString() const noexcept {
 	std::stringstream ss;
 	ss << "{ size=" << size() << " offset=" << offset_ <<" ";
-	for each (const Byte byte in data_) {
+	for (const Byte byte: data_) {
 		ss << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(byte) << " ";
 	}
 	ss << "}";
