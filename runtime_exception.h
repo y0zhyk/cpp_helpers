@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-template<typename Derived, typename T>
+template<typename T, typename Traits>
 class RuntimeException
     : public std::runtime_error {
  public:
@@ -29,7 +29,7 @@ class RuntimeException
  private:
     static std::string FormatErrorMessage(const char* message, ErrorType error) {
         std::stringstream error_message;
-        error_message << message << " (Error: " << error << ") : " << Derived::ErrorMessage(error);
+        error_message << message << " (Error: " << error << ") : " << Traits::ErrorMessage(error);
         return error_message.str();
     }
 

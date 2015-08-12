@@ -13,21 +13,14 @@
 #include "runtime_exception.h"
 #include "string_utils.h"
 
-
-
-class HResultException
-    : public RuntimeException<HResultException, HRESULT> {
- public:
-    HResultException(const char* message, HRESULT error)
-            : RuntimeException(message, error) {
-    }
-
+class HResultExceptionTraits {
     static std::string ErrorMessage(HRESULT error) {
         std::basic_string<TCHAR> error_message = _com_error(error).ErrorMessage();
         return std::string(std::begin(error_message), std::end(error_message));
     }
 };
 
+using HResultException = RuntimeExeption<HRESULT, HResultExceptionTraits>;
 
 void ThrowIfHResultFailed(HRESULT hr, const char* message) {
     ThrowRuntimeExceptionIf<HResultException>(FAILED(hr), message, hr);
