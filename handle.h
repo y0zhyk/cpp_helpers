@@ -15,11 +15,13 @@ class Handle {
             : value_(value) {
     }
 
+    Handle(const Handle& other) = delete;
+
+    Handle& operator=(const Handle& other) = delete;
+
     Handle(Handle&& other) noexcept
             : value_(other.Release()) {
     }
-
-    Handle(const Handle& other) = delete;
 
     Handle& operator=(Handle&& other) noexcept {
         Reset(other.Release());

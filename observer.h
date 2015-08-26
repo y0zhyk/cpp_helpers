@@ -37,7 +37,7 @@ class Notifier {
  protected:
     template<typename Function_t, typename... Arguments>
     void Notify(Function_t func, Arguments... params) const {
-        for (auto listener : listeners_)
+        for (auto listener: listeners_)
             std::mem_fun(func)(listener, params...);
     }
 };
@@ -60,7 +60,7 @@ class Listener
     }
 
     virtual ~Listener() {
-        for (auto notifier : notifiers_)
+        for (auto notifier: notifiers_)
             notifier->Detach(this);
     }
  private:

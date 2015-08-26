@@ -15,7 +15,7 @@
 
 struct Win32HandleTraits {
     static HANDLE Invalid() noexcept {
-        return NULL;
+        return INVALID_HANDLE_VALUE;
     }
 
     static void Close(HANDLE value) noexcept {

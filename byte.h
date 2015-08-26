@@ -12,7 +12,11 @@
 namespace core {
 
 typedef std::uint8_t Byte;
+
 typedef std::vector<Byte> Bytes;
+
+template <size_t size>
+using Bytes = std::array<Byte, size>;
 
 }  // namespace core
 

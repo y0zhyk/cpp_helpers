@@ -14,13 +14,11 @@
 namespace core {
 
 MemoryStream::MemoryStream(const Byte* data, const size_t size) {
-    if (size == 0) {
+    if (size == 0)
         return;
-    }
 
-    if (data == nullptr) {
+    if (data == nullptr)
         throw std::invalid_argument("MemoryStream::MemoryStream(): data == nullptr");
-    }
 
     data_.assign(data, data + size);
 }
@@ -38,13 +36,11 @@ const Bytes& MemoryStream::bytes() const noexcept {
 }
 
 void MemoryStream::Write(const Byte* data, const size_t size) {
-    if (size == 0) {
+    if (size == 0)
         return;
-    }
 
-    if (data == nullptr) {
+    if (data == nullptr)
         throw std::invalid_argument("MemoryStream::Write(): data == nullptr");
-    }
 
     const size_t current_size = data_.size();
     data_.resize(current_size + size);
@@ -52,17 +48,14 @@ void MemoryStream::Write(const Byte* data, const size_t size) {
 }
 
 void MemoryStream::Read(Byte* data, const size_t size) {
-    if (size == 0) {
+    if (size == 0)
         return;
-    }
 
-    if (data == nullptr) {
+    if (data == nullptr)
          throw std::invalid_argument("MemoryStream::Read(): data == nullptr");
-    }
 
-    if (size > this->size() - offset_) {
+    if (size > this->size() - offset_)
          throw std::out_of_range("MemoryStream::Read(): size > size_ - offset_");
-    }
 
     std::memcpy(data, data_.data() + offset_, size);
     offset_ += size;
@@ -74,13 +67,13 @@ void MemoryStream::Clear() noexcept {
 }
 
 std::string MemoryStream::ToString() const noexcept {
-	std::stringstream ss;
-	ss << "{ size=" << size() << " offset=" << offset_ <<" ";
-	for (const Byte byte: data_) {
-		ss << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(byte) << " ";
-	}
-	ss << "}";
-	return ss.str();
+    std::stringstream ss;
+    ss << "{ size=" << size() << " offset=" << offset_ <<" ";
+    for (const Byte byte: data_)
+        ss << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(byte) << " ";
+
+    ss << "}";
+    return ss.str();
 }
 
 MemoryStream& MemoryStream::operator << (const MemoryStream& ms) {

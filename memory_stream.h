@@ -23,6 +23,14 @@ class MemoryStream {
     // Initializes a new instance of the MemoryStream class based on the specified block of bytes.
     MemoryStream(const Byte* data, const size_t size);
 
+    MemoryStream(const MemoryStream& other) = default;
+
+    MemoryStream& operator=(const MemoryStream& other) = default;
+
+    MemoryStream(MemoryStream&& other) = default;
+
+    MemoryStream& operator=(MemoryStream&& other) = default;
+
     ~MemoryStream() noexcept = default;
     // Returns size of data in buffer in bytes.
     inline size_t size() const noexcept;
@@ -36,7 +44,6 @@ class MemoryStream {
     void Write(const Byte* data, const size_t size);
 
     void Clear() noexcept;
-
     // Returns a string that represents the stream.
     std::string ToString() const noexcept;
 
