@@ -20,7 +20,7 @@ class HResultExceptionTraits {
     }
 };
 
-using HResultException = RuntimeExeption<HRESULT, HResultExceptionTraits>;
+using HResultException = RuntimeException<HRESULT, HResultExceptionTraits>;
 
 void ThrowIfHResultFailed(HRESULT hr, const char* message) {
     ThrowRuntimeExceptionIf<HResultException>(FAILED(hr), message, hr);

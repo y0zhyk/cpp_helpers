@@ -10,15 +10,16 @@
 #include <windows.h>
 #include <string>
 
-#include "runtime_exception.h"
+#include "./runtime_exception.h"
 
 class Win32ExceptionTraits {
+ public:
     static std::string ErrorMessage(DWORD error) {
         return win32_api::GetErrorString(error);
     }
 };
 
-using Win32Exception = RuntimeExeption<DWORD, Win32ExceptionTraits>;
+using Win32Exception = RuntimeException<DWORD, Win32ExceptionTraits>;
 
 void ThrowLastError(const char* message, DWORD error = ::GetLastError()) {
     throw Win32Exception(message, error);

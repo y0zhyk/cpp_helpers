@@ -5,6 +5,9 @@
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
 //
 
+#include <memory>
+#include <functional>
+
 #include "./win32_api.h"
 #include "./win32_exception.h"
 
@@ -15,7 +18,7 @@ void CloseHandle(HANDLE handle) {
 }
 
 static void LocalFree(HLOCAL memory) {
-    ThrowLastErrorIf(::LocalFree(buffer) != NULL, "Function ::LocalFree() has been failed");
+    ThrowLastErrorIf(::LocalFree(memory) != NULL, "Function ::LocalFree() has been failed");
 }
 
 std::string GetErrorString(DWORD error) {
@@ -26,7 +29,7 @@ std::string GetErrorString(DWORD error) {
     const size_t size = ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
             nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPSTR>(&raw_buffer), 0, nullptr);
     ThrowLastErrorIf(size == 0, "Function ::FormatMessage() has been failed");
-    std::unique_ptr<char, void(HLOCAL)> buffer(raw_buffer, LocalFree);
+    std::unique_ptr<char, std::function<void(HLOCAL)>> buffer(raw_buffer, LocalFree);
     return std::string(buffer.get(), size);
 }
 

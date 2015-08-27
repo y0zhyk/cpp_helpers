@@ -12,7 +12,6 @@
 #include <type_traits>
 
 #include "byte.h"
-#include "blob.h"
 
 namespace core {
 
@@ -33,9 +32,9 @@ class MemoryStream {
 
     ~MemoryStream() noexcept = default;
     // Returns size of data in buffer in bytes.
-    inline size_t size() const noexcept;
+    size_t size() const noexcept;
     // Returns a direct pointer to the buffer.
-    inline const Byte* data() const noexcept;
+    const Byte* data() const noexcept;
     // Returns reference to a blob that owns the buffer.
     const Bytes& bytes() const noexcept;
     // Reads a block of bytes from the stream and writes the data to a buffer.
