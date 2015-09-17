@@ -10,7 +10,7 @@
 #include <windows.h>
 #include <string>
 
-#include "./runtime_exception.h"
+#include "runtime_exception.h"
 
 class Win32ExceptionTraits {
  public:

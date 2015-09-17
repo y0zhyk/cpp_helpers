@@ -29,7 +29,6 @@ class Singleton {
 
  private:
     Singleton<T>(const Singleton<T>&) = delete;
-	
     const Singleton<T>& operator=(const Singleton<T>&) = delete;
  
     static std::once_flag& once_flag() {
