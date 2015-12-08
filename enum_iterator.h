@@ -1,9 +1,5 @@
-//
-//  enum_iterator.h
-//
 //  Created by Taras Lushney on 6/11/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef ENUM_ITERATOR_H_
 #define ENUM_ITERATOR_H_
@@ -15,15 +11,15 @@ template<typename T>
 class Enum {
  public:
     class Iterator : std::iterator<std::forward_iterator_tag, T> {
-        using underlying_type_t = typename std::underlying_type<T>::type;
-        underlying_type_t value_;
+        using UnderlyingValue = typename std::underlying_type<T>::type;
+        UnderlyingValue value_;
      public:
-        explicit Iterator(value_type value)
-            : value_(static_cast<underlying_type_t>(value)) {
+        explicit Iterator(T value)
+            : value_(static_cast<UnderlyingValue>(value)) {
         }
 
         value_type operator*() {
-            return static_cast<value_type>(value_);
+            return static_cast<T>(value_);
         }
 
         void operator++() {

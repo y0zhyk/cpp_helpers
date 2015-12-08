@@ -1,9 +1,5 @@
-//
-//  memory_stream.cpp
-//
 //  Created by Taras Lushney on 2/7/15.
 //  Copyright (c) 2015 Taras Lushney. All rights reserved.
-//
 
 #include <sstream>
 #include <iterator>

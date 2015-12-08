@@ -1,9 +1,5 @@
-//
-//  uuid.h
-//
 //  Created by Taras Lushney on 7/01/15.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef UUID_H_
 #define UUID_H_

@@ -1,6 +1,3 @@
-//
-//  timer.h
-//
 //  Created by Taras Lushney on 2/11/15.
 //  Copyright (c) 2015 Taras Lushney. All rights reserved.
 

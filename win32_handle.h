@@ -1,9 +1,5 @@
-//
-//  win32_handle.h
-//
 //  Created by Taras Lushney on 5/29/15.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef WIN32_HANDLE_H_
 #define WIN32_HANDLE_H_

@@ -1,9 +1,5 @@
-//
-//  singleton.h
-//
 //  Created by Taras Lushney on 6/31/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef SINGLETON_H_
 #define SINGLETON_H_
@@ -42,4 +38,4 @@ class Singleton {
 template<class T>
 std::unique_ptr<T> Singleton<T>::instance_ = nullptr;
  
-#endif
+#endif  // SINGLETON_H_

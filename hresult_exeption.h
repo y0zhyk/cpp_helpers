@@ -1,9 +1,6 @@
-//
-//  hresult_exception.h
-//
 //  Created by Taras Lushney on 7/7/15.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
+
 #ifndef HRESULT_EXCEPTION_H_
 #define HRESULT_EXCEPTION_H_
 

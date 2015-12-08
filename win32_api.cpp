@@ -1,9 +1,5 @@
-//
-//  win32_utils.cpp
-//
 //  Created by Taras Lushney on 6/8/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #include <memory>
 #include <functional>

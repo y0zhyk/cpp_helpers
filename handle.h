@@ -1,9 +1,5 @@
-//
-//  handle.h
-//
 //  Created by Taras Lushney on 5/29/15.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef HANDLE_H_
 #define HANDLE_H_
@@ -11,17 +7,12 @@
 template<typename T, typename Traits>
 class Handle {
  public:
-    explicit Handle(T value = Traits::Invalid()) noexcept
-            : value_(value) {
-    }
+    explicit Handle(T value = Traits::Invalid()) noexcept : value_(value) {}
 
     Handle(const Handle& other) = delete;
-
     Handle& operator=(const Handle& other) = delete;
 
-    Handle(Handle&& other) noexcept
-            : value_(other.Release()) {
-    }
+    Handle(Handle&& other) noexcept : value_(other.Release()) {}
 
     Handle& operator=(Handle&& other) noexcept {
         Reset(other.Release());
@@ -59,9 +50,8 @@ class Handle {
 
  private:
     void Close() noexcept {
-        if (*this) {
+        if (*this)
             Traits::Close(value_);
-        }
     }
 
     T value_;

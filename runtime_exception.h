@@ -1,9 +1,5 @@
-//
-//  runtime_exception.h
-//
 //  Created by Taras Lushney on 10/30/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef RUNTIME_EXCEPTION_H_
 #define RUNTIME_EXCEPTION_H_
@@ -35,12 +31,5 @@ class RuntimeException
 
     const ErrorType error_;
 };
-
-
-template<typename ExceptionType>
-void ThrowRuntimeExceptionIf(bool expression, const char* message, typename ExceptionType::ErrorType error) {
-    if (expression)
-        throw ExceptionType(message, error);
-}
 
 #endif  // RUNTIME_EXCEPTION_H_

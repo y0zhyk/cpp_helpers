@@ -1,9 +1,6 @@
-//
-//  win32_exception.h
-//
 //  Created by Taras Lushney on 10/23/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
+
 #ifndef WIN32_EXCEPTION_H_
 #define WIN32_EXCEPTION_H_
 
@@ -11,9 +8,9 @@
 #include <string>
 
 #include "runtime_exception.h"
+#inclide "exeption.h"
 
-class Win32ExceptionTraits {
- public:
+struct Win32ExceptionTraits {
     static std::string ErrorMessage(DWORD error) {
         return win32_api::GetErrorString(error);
     }
@@ -26,7 +23,7 @@ void ThrowLastError(const char* message, DWORD error = ::GetLastError()) {
 }
 
 void ThrowLastErrorIf(bool expression, const char* message, DWORD error = ::GetLastError()) {
-    ThrowRuntimeExceptionIf<Win32Exception>(expression, message, error);
+    ThrowIf<Win32Exception>(expression, message, error);
 }
 
 #endif  // WIN32_EXCEPTION_H_

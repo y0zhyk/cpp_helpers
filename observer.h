@@ -1,9 +1,5 @@
-//
-//  observer.h
-//
 //  Created by Taras Lushney on 3/21/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef OBSERVER_H_
 #define OBSERVER_H_
@@ -15,18 +11,18 @@ class Listener;
 
 template <typename Events>
 class Notifier {
-    typedef Listener<Events> Listener_t;
-    std::vector<Listener_t*> listeners_;
-    friend Listener_t;
+    typedef Listener<Events> EventsListener;
+    std::vector<EventsListener*> listeners_;
+    friend EventsNotifier;
 
-    bool Attach(Listener_t* listener) {
+    bool Attach(EventsListener* listener) {
         if (std::find(listeners_.begin(), listeners_.end(), listener) != listeners_.end())
             return false;
         listeners_.push_back(listener);
         return true;
     }
 
-    bool Detach(Listener_t* listener) {
+    bool Detach(EventsListener* listener) {
         auto found_listener = std::find(listeners_.begin(), listeners_.end(), listener);
         if (found_listener == listeners_.end())
             return false;
@@ -35,23 +31,23 @@ class Notifier {
     }
 
  protected:
-    template<typename Function_t, typename... Arguments>
-    void Notify(Function_t func, Arguments... params) const {
+    template<typename Function, typename... Arguments>
+    void Notify(Function func, Arguments... params) const {
         for (auto listener: listeners_)
             std::mem_fun(func)(listener, params...);
     }
 };
 
 template <typename Events>
-class Listener
-        : private Events {
+class Listener 
+    : private Events {
  protected:
-    void AttachTo(Notifier_t* notifier) {
+    void AttachTo(EventsNotifier* notifier) {
         if (notifier->Attach(this))
             notifiers_.push_back(notifier);
     }
 
-    void DetachFrom(Notifier_t* notifier) {
+    void DetachFrom(EventsNotifier* notifier) {
         auto found_notifier = std::find(notifiers_.begin(), notifiers_.end(), notifier);
         if (found_notifier != notifiers_.end()) {
             notifiers_.erase(found_notifier);
@@ -64,8 +60,8 @@ class Listener
             notifier->Detach(this);
     }
  private:
-    typedef Notifier<Events> Notifier_t;
-    std::vector<Notifier_t*> notifiers_;
+    typedef Notifier<Events> EventsNotifier;
+    std::vector<EventsNotifier*> notifiers_;
 };
 
 #endif  // OBSERVER_H_

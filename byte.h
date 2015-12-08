@@ -1,6 +1,3 @@
-//
-//  byte.h
-//
 //  Created by Taras Lushney on 8/05/15.
 //  Copyright (c) 2015 Taras Lushney. All rights reserved.
 
@@ -12,7 +9,6 @@
 namespace core {
 
 typedef std::uint8_t Byte;
-
 typedef std::vector<Byte> Bytes;
 
 }  // namespace core

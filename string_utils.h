@@ -1,9 +1,5 @@
-//
-//  string_utils.h
-//
 //  Created by Taras Lushney on 9/26/14.
 //  Copyright (c) 2014 Taras Lushney. All rights reserved.
-//
 
 #ifndef STRING_UTILS_H_
 #define STRING_UTILS_H_
