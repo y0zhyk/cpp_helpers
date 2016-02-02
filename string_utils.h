@@ -11,17 +11,17 @@ namespace utils_string {
 
 template<typename T>
 std::string ToMultiByteString(const std::basic_string<T>& str) {
-	using convert = std::wstring_convert<std::codecvt<T, char, std::mbstate_t>, T>;
-	return convert().to_bytes(str);
+    using convert = std::wstring_convert<std::codecvt<T, char, std::mbstate_t>, T>;
+    return convert().to_bytes(str);
 }
 
 std::wstring ToWideString(const std::string& str) {
-	using convert = std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>>;
-	return convert().from_bytes(str);
+    using convert = std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>>;
+    return convert().from_bytes(str);
 }
 
 std::wstring ToWideString(const std::wstring& str) {
-	return str;
+    return str;
 }
 
 };  // namespace utils_string
