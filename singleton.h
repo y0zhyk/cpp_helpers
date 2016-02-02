@@ -22,8 +22,6 @@ class Singleton {
  private:
     Singleton() = default;
     ~Singleton() = default;
-
- private:
     Singleton<T>(const Singleton<T>&) = delete;
     const Singleton<T>& operator=(const Singleton<T>&) = delete;
  
