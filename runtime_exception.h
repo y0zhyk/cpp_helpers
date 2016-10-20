@@ -7,29 +7,28 @@
 #include <string>
 #include <sstream>
 
-template<typename T, typename Traits>
+template<typename Error, typename Traits>
 class RuntimeException
     : public std::runtime_error {
  public:
-    typedef T ErrorType;
 
-    RuntimeException(const char* message, ErrorType error)
+    RuntimeException(const char* message, Error error)
         : std::runtime_error(FormatErrorMessage(message, error))
         , error_(error) {
     }
 
-    ErrorType error() const {
+    Error error() const {
         return error_;
     }
 
  private:
-    static std::string FormatErrorMessage(const char* message, ErrorType error) {
+    static std::string FormatErrorMessage(const char* message, Error error) {
         std::stringstream error_message;
         error_message << message << " (Error: " << error << ") : " << Traits::ErrorMessage(error);
         return error_message.str();
     }
 
-    const ErrorType error_;
+    const Error error_;
 };
 
 #endif  // RUNTIME_EXCEPTION_H_

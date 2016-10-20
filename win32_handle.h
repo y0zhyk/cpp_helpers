@@ -22,4 +22,3 @@ struct Win32HandleTraits {
 using Win32Handle = Handle<HANDLE, Win32HandleTraits>;
 
 #endif  // WIN32_HANDLE_H_
-

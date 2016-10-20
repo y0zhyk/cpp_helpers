@@ -12,7 +12,7 @@
 
 class HResultExceptionTraits {
     static std::string ErrorMessage(HRESULT error) {
-        std::basic_string<TCHAR> error_message = _com_error(error).ErrorMessage();
+        win32_api::TString error_message = _com_error(error).ErrorMessage();
         return std::string(std::begin(error_message), std::end(error_message));
     }
 };

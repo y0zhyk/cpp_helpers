@@ -92,9 +92,9 @@ class stopwatch {
     struct units_per_second {
         const static long long value = pow<10, -unit>::value;
     };
-    // The value of the counter on start ticking.
+    // The value of the counter on start ticking
     long long start_count_;
-    // Counts elapsed in start-stop interval.
+    // Counts elapsed in start-stop interval
     long long elapsed_counts_;
     //Ban copy
     explicit stopwatch(const Stopwatch&);

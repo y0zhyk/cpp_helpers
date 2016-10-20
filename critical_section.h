@@ -4,14 +4,15 @@
 #ifndef CRITICAL_SECTION_H_
 #define CRITICAL_SECTION_H_
 
-class CriticalSection
-{
+#include <windows.h>
+
+class CriticalSection {
  public:
-    CCriticalSectionEx() noexcept {
+    CCriticalSection() noexcept {
         ::InitializeCriticalSection(&cs_);
     }
 	
-    ~CCriticalSectionEx() noexcept {
+    ~CCriticalSection() noexcept {
         ::DeleteCriticalSection(&cs_);
     }
 

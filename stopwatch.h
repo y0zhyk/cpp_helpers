@@ -48,13 +48,11 @@ public:
     stop_watch() : start(C::now()) {}
 
     template<typename U>
-    typename U::rep elapsed() const
-    {
+    typename U::rep elapsed() const {
         return std::chrono::duration_cast<U>(C::now() - start).count();
     }
 
-    void reset()
-    {
+    void reset() {
         start = C::now();
     }
 };

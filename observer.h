@@ -39,8 +39,7 @@ class Notifier {
 };
 
 template <typename Events>
-class Listener 
-    : private Events {
+class Listener : private Events {
  protected:
     void AttachTo(EventsNotifier* notifier) {
         if (notifier->Attach(this))
