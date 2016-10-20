@@ -6,13 +6,12 @@
 
 template <typename Exeption, typename Expression, typename... Args>
 void ThrowIf(Expression&& expression, Args&&... args) {
-    if (expression)
-        throw Exeption(std::forward<Args>(args)...);
+  if (expression) throw Exeption(std::forward<Args>(args)...);
 }
 
 template <typename Exeption, typename Expression, typename... Args>
 void ThrowIfFailed(Expression&& expression, Args&&... args) {
-    ThrowIf<Exeption>(!expression, args...);
+  ThrowIf<Exeption>(!expression, args...);
 }
 
 #endif  // EXEPTION_H_

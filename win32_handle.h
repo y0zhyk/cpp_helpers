@@ -4,19 +4,19 @@
 #ifndef WIN32_HANDLE_H_
 #define WIN32_HANDLE_H_
 
-#include <windows.h>
+#include <Windows.h>
 
 #include "handle.h"
 #include "win32_api.h"
 
-struct Win32HandleTraits {
-    static HANDLE Invalid() noexcept {
-        return INVALID_HANDLE_VALUE;
-    }
+class Win32HandleTraits {
+ public:
+  static HANDLE Invalid() noexcept { return INVALID_HANDLE_VALUE; }
 
-    static void Close(HANDLE value) noexcept {
-        win32_api::CloseHandle(value);
-    }
+  static void Close(HANDLE value) noexcept { win32_api::CloseHandle(value); }
+
+ private:
+  DISALLOW_IMPLICIT_CONSTRUCTORS(Win32HandleTraits);
 };
 
 using Win32Handle = Handle<HANDLE, Win32HandleTraits>;

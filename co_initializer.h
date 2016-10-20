@@ -1,28 +1,31 @@
 //  Created by Taras Lushney on 10/12/16.
-//  Copyright (c) 2014 Taras Lushney. All rights reserved.
+//  Copyright (c) 2016 Taras Lushney. All rights reserved.
 
-#ifndef CO_INITIALIZER_H_
-#define CO_INITIALIZER_H_
+#ifndef SCOPED_CO_INITIALIZER_H_
+#define SCOPED_CO_INITIALIZER_H_
 
-#include <windows.h>
+#include <ObjBase.h>
 
 #include "hresult_exeption.h"
-                                     
-class CoInitializer {
+#include "macros.h"
+
+class ScopedCoInitializer {
  public:
-    explicit CCoInitializer(DWORD coinit = COINIT_APARTMENTTHREADED) {
-        HRESULT hr = ::CoInitializeEx(nullptr, coinit);
-        ThrowIfHResultFailed(hr, "Function ::CoInitializeEx() has been failed");
-        coinitialized_ = true;
-   }
+  explicit ScopedCoInitializer(DWORD coinit = COINIT_APARTMENTTHREADED) {
+    hr_ = ::CoInitializeEx(nullptr, coinit);
+    ThrowIfHResultFailed(hr, "Function ::CoInitializeEx() has been failed");
+  }
 
-   ~CCoInitializer() noexcept {
-      if (coinitialized_)
-         ::CoUninitialize();
-   }
+  ~ScopedCoInitializer() noexcept {
+    if (succeeded()) ::CoUninitialize();
+  }
+
+  bool succeeded() const { return SUCCEEDED(hr_); }
+
  private:
-   bool coinitialized_ = false;
+  HRESULT hr_;
 
-   CoInitializer(const CoInitializer&) = delete;
-   CoInitializer& operator=(const CoInitializer&) = delete;
+  DISALLOW_COPY_AND_ASSIGN(ScopedCOMInitializer);
 };
+
+#endif  // SCOPED_CO_INITIALIZER_H_
