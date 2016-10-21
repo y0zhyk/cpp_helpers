@@ -4,36 +4,37 @@
 #ifndef SINGLETON_H_
 #define SINGLETON_H_
 
-#include <mutex>
 #include <memory>
+#include <mutex>
 #include <utility>
+
+#include "macros.h"
 
 template <class T>
 class Singleton {
  public:
     template <typename... Args>
     static T& instance(Args&&... args) {
-        std::call_once(once_flag(), [](Args&&... args) {
-            instance_.reset(new T(std::forward<Args>(args)...));
-        }, std::forward<Args>(args)...);
-      return *instance_.get();
+        std::call_once(once_flag(), [](Args&&... args) { instance_.reset(new T(std::forward<Args>(args)...)); },
+            std::forward<Args>(args)...);
+        return *instance_.get();
     }
 
  private:
     Singleton() = default;
     ~Singleton() = default;
-    Singleton<T>(const Singleton<T>&) = delete;
-    const Singleton<T>& operator=(const Singleton<T>&) = delete;
- 
+
     static std::once_flag& once_flag() {
         static std::once_flag once;
         return once;
     }
 
     static std::unique_ptr<T> instance_;
+
+    DISALLOW_COPY_AND_ASSIGN(Singleton);
 };
- 
-template<class T>
+
+template <class T>
 std::unique_ptr<T> Singleton<T>::instance_ = nullptr;
- 
+
 #endif  // SINGLETON_H_

@@ -4,18 +4,14 @@
 #ifndef RUNTIME_EXCEPTION_H_
 #define RUNTIME_EXCEPTION_H_
 
-#include <string>
 #include <sstream>
+#include <string>
 
-template<typename Error, typename Traits>
-class RuntimeException
-    : public std::runtime_error {
+template <typename Error, typename Traits>
+class RuntimeException : public std::runtime_error {
  public:
-
     RuntimeException(const char* message, Error error)
-        : std::runtime_error(FormatErrorMessage(message, error))
-        , error_(error) {
-    }
+        : std::runtime_error(FormatErrorMessage(message, error)), error_(error) {}
 
     Error error() const {
         return error_;

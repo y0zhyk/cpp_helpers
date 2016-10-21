@@ -11,9 +11,9 @@ class ScopedHandle {
     typedef typename Traits::Handle T;
 
     explicit ScopedHandle(T value = Traits::NullHandle()) : value_(value) {}
-    ScopedHandle(ScopedHandle &&other) : value_(other.Release()) {}
+    ScopedHandle(ScopedHandle&& other) : value_(other.Release()) {}
 
-    ScopedHandle &operator=(ScopedHandle &&other) noexcept {
+    ScopedHandle& operator=(ScopedHandle&& other) noexcept {
         Reset(other.Release());
         return *this;
     }
@@ -31,7 +31,7 @@ class ScopedHandle {
     }
 
     explicit operator bool() const {
-        return Traits::IsHandleValid(value_);
+        return IsValid();
     }
 
     explicit operator T() const {

@@ -9,16 +9,30 @@
 #include "handle.h"
 #include "win32_api.h"
 
+// The traits class for Win32 handles.
 class Win32HandleTraits {
  public:
-  static HANDLE Invalid() noexcept { return INVALID_HANDLE_VALUE; }
+    typedef HANDLE Handle;
 
-  static void Close(HANDLE value) noexcept { win32_api::CloseHandle(value); }
+    // Returns NULL handle value.
+    static HANDLE NullHandle() {
+        return NULL;
+    }
+
+    // Closes the handle.
+    static void CloseHandle(HANDLE handle) {
+        win32_api::CloseHandle(handle);
+    }
+
+    // Returns true if the handle value is valid.
+    static bool IsHandleValid(HANDLE handle) {
+        return handle != NULL && handle != INVALID_HANDLE_VALUE;
+    }
 
  private:
-  DISALLOW_IMPLICIT_CONSTRUCTORS(Win32HandleTraits);
+    DISALLOW_IMPLICIT_CONSTRUCTORS(Win32HandleTraits);
 };
 
-using Win32Handle = Handle<HANDLE, Win32HandleTraits>;
+using Win32Handle = ScopedHandle<HANDLE, Win32HandleTraits>;
 
 #endif  // WIN32_HANDLE_H_

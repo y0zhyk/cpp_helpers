@@ -8,14 +8,14 @@ namespace patterns {
 
 class Command {
  public:
-  virtual ~Command() noexcept = default;
-  // Defines the method to be called when the command is invoked.
-  virtual void Execute() = 0;
+    virtual ~Command() noexcept = default;
+    // Defines the method to be called when the command is invoked.
+    virtual void Execute() = 0;
 };
 
 class UndoableCommand : public Command {
  public:
-  virtual void Undo() = 0;
+    virtual void Undo() = 0;
 };
 
 }  // namespace patterns

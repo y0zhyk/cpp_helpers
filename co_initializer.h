@@ -11,21 +11,24 @@
 
 class ScopedCoInitializer {
  public:
-  explicit ScopedCoInitializer(DWORD coinit = COINIT_APARTMENTTHREADED) {
-    hr_ = ::CoInitializeEx(nullptr, coinit);
-    ThrowIfHResultFailed(hr, "Function ::CoInitializeEx() has been failed");
-  }
+    explicit ScopedCoInitializer(DWORD coinit = COINIT_APARTMENTTHREADED) {
+        hr_ = ::CoInitializeEx(nullptr, coinit);
+        ThrowIfHResultFailed(hr, "Function ::CoInitializeEx() has been failed");
+    }
 
-  ~ScopedCoInitializer() noexcept {
-    if (succeeded()) ::CoUninitialize();
-  }
+    ~ScopedCoInitializer() noexcept {
+        if (succeeded())
+            ::CoUninitialize();
+    }
 
-  bool succeeded() const { return SUCCEEDED(hr_); }
+    bool succeeded() const {
+        return SUCCEEDED(hr_);
+    }
 
  private:
-  HRESULT hr_;
+    HRESULT hr_;
 
-  DISALLOW_COPY_AND_ASSIGN(ScopedCOMInitializer);
+    DISALLOW_COPY_AND_ASSIGN(ScopedCOMInitializer);
 };
 
 #endif  // SCOPED_CO_INITIALIZER_H_

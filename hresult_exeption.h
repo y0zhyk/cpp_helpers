@@ -11,16 +11,16 @@
 #include "string_utils.h"
 
 class HResultExceptionTraits {
-  static std::string ErrorMessage(HRESULT error) {
-    win32_api::TString error_message = _com_error(error).ErrorMessage();
-    return std::string(std::begin(error_message), std::end(error_message));
-  }
+    static std::string ErrorMessage(HRESULT error) {
+        win32_api::TString error_message = _com_error(error).ErrorMessage();
+        return std::string(std::begin(error_message), std::end(error_message));
+    }
 };
 
 using HResultException = RuntimeException<HRESULT, HResultExceptionTraits>;
 
-void ThrowIfHResultFailed(HRESULT hr, const char *message) {
-  ThrowRuntimeExceptionIf<HResultException>(FAILED(hr), message, hr);
+void ThrowIfHResultFailed(HRESULT hr, const char* message) {
+    ThrowRuntimeExceptionIf<HResultException>(FAILED(hr), message, hr);
 }
 
 #endif  // HRESULT_EXCEPTION_H_

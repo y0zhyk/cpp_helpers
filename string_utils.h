@@ -4,12 +4,12 @@
 #ifndef STRING_UTILS_H_
 #define STRING_UTILS_H_
 
-#include <string>
 #include <locale>
+#include <string>
 
 namespace utils_string {
 
-template<typename T>
+template <typename T>
 std::string ToMultiByteString(const std::basic_string<T>& str) {
     using convert = std::wstring_convert<std::codecvt<T, char, std::mbstate_t>, T>;
     return convert().to_bytes(str);

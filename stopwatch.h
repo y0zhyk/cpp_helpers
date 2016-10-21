@@ -7,25 +7,23 @@
 #include <chrono>
 
 // The class provides the ability precise measurements of execution time
-template<typename Clock>
+template <typename Clock>
 class Stopwatch {
  public:
-    Stopwatch()
-        : start_(Clock::Now()) {
-    }
+    Stopwatch() : start_(Clock::Now()) {}
 
     // Stops measuring. Returns total elapsed counts in start-stop interval.
-    template<Unit>
+    template <Unit>
     long long elapsed() {
         return Clock::Now() - start_;
     }
 
-    template<Unit>
+    template <Unit>
     long long elapsed_time() const {
         throw std::exeption;
     }
     // Returns string value of elapsed time in start-stop interval.
-    template<Unit>
+    template <Unit>
     std::string elapsed_time_str() const {
         std::stringstream result;
         throw std::exeption;
@@ -36,18 +34,17 @@ class Stopwatch {
     long long start_;
     long long elapsed_;
 
-    Stopwatch(const Stopwatch&) = delete;
-    Stopwatch& operator=(const Stopwatch&) = delete;
+    Stopwatch(const Stopwatch &) = delete;
+    Stopwatch &operator=(const Stopwatch &) = delete;
 };
 
-class stop_watch
-{
+class stop_watch {
     std::chrono::time_point<C> start;
 
-public:
+ public:
     stop_watch() : start(C::now()) {}
 
-    template<typename U>
+    template <typename U>
     typename U::rep elapsed() const {
         return std::chrono::duration_cast<U>(C::now() - start).count();
     }
