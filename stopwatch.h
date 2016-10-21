@@ -34,8 +34,8 @@ class Stopwatch {
     long long start_;
     long long elapsed_;
 
-    Stopwatch(const Stopwatch &) = delete;
-    Stopwatch &operator=(const Stopwatch &) = delete;
+    Stopwatch(const Stopwatch&) = delete;
+    Stopwatch& operator=(const Stopwatch&) = delete;
 };
 
 class stop_watch {
