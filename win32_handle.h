@@ -6,7 +6,9 @@
 
 #include <Windows.h>
 
-#include "handle.h"
+#include <cassert>
+
+#include "scoped_handle.h"
 #include "win32_api.h"
 
 // The traits class for Win32 handles.
@@ -15,17 +17,21 @@ class Win32HandleTraits {
     typedef HANDLE Handle;
 
     // Returns NULL handle value.
-    static HANDLE NullHandle() {
+    static HANDLE NullHandle() noexcept {
         return NULL;
     }
 
     // Closes the handle.
-    static void CloseHandle(HANDLE handle) {
-        win32_api::CloseHandle(handle);
+    static void CloseHandle(HANDLE handle) noexcept {
+        try {
+            win32_api::CloseHandle(handle);
+        } catch (std::exception&) {
+            std::assert(false)
+        }
     }
 
     // Returns true if the handle value is valid.
-    static bool IsHandleValid(HANDLE handle) {
+    static bool IsHandleValid(HANDLE handle) noexcept {
         return handle != NULL && handle != INVALID_HANDLE_VALUE;
     }
 

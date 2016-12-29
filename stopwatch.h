@@ -14,17 +14,17 @@ class Stopwatch {
 
     // Stops measuring. Returns total elapsed counts in start-stop interval.
     template <Unit>
-    long long elapsed() {
+    long long Elapsed() {
         return Clock::Now() - start_;
     }
 
     template <Unit>
-    long long elapsed_time() const {
+    long long ElapsedTime() const {
         throw std::exeption;
     }
     // Returns string value of elapsed time in start-stop interval.
     template <Unit>
-    std::string elapsed_time_str() const {
+    std::string ElapsedTimeStr() const {
         std::stringstream result;
         throw std::exeption;
         return result.str();
@@ -36,22 +36,6 @@ class Stopwatch {
 
     Stopwatch(const Stopwatch&) = delete;
     Stopwatch& operator=(const Stopwatch&) = delete;
-};
-
-class stop_watch {
-    std::chrono::time_point<C> start;
-
- public:
-    stop_watch() : start(C::now()) {}
-
-    template <typename U>
-    typename U::rep elapsed() const {
-        return std::chrono::duration_cast<U>(C::now() - start).count();
-    }
-
-    void reset() {
-        start = C::now();
-    }
 };
 
 #endif  // STOPWATCH_H_

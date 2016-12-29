@@ -3,6 +3,8 @@
 #ifndef SCOPED_HANDLE_H_
 #define SCOPED_HANDLE_H_
 
+#include <utility>
+
 #include "macros.h"
 
 template <typename Traits>
@@ -11,14 +13,14 @@ class ScopedHandle {
     typedef typename Traits::Handle T;
 
     explicit ScopedHandle(T value = Traits::NullHandle()) : value_(value) {}
-    ScopedHandle(ScopedHandle&& other) : value_(other.Release()) {}
+    ScopedHandle(ScopedHandle&& other) noexcept : value_(other.Release()) {}
 
     ScopedHandle& operator=(ScopedHandle&& other) noexcept {
         Reset(other.Release());
         return *this;
     }
 
-    virtual ~ScopedHandle() noexcept {
+    virtual ~ScopedHandle() {
         Close();
     }
 
@@ -30,31 +32,26 @@ class ScopedHandle {
         return Traits::IsHandleValid(value_);
     }
 
-    explicit operator bool() const {
-        return IsValid();
-    }
-
     explicit operator T() const {
         return get();
     }
 
-    T Release() {
-        auto value = value_;
-        value_ = Traits::NullHandle();
+    T Release() noexcept {
+        auto value = Traits::NullHandle();
+        std::swap(value, value_);
         return value;
     }
 
-    bool Reset(T value = Traits::NullHandle()) noexcept {
+    void Reset(T value = Traits::NullHandle()) noexcept {
         if (value_ != value) {
             Close();
             value_ = value;
         }
-        return *this;
     }
 
  private:
     void Close() {
-        if (*this)
+        if (IsValid())
             Traits::CloseHandle(value_);
     }
 

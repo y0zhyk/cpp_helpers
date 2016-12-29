@@ -10,29 +10,27 @@
 
 class CriticalSection {
  public:
-    CCriticalSection() noexcept {
+    CriticalSection() {
         ::InitializeCriticalSection(&cs_);
     }
 
-    ~CCriticalSection() noexcept {
+    ~CriticalSection() noexcept {
         ::DeleteCriticalSection(&cs_);
     }
 
-    void Enter() noexcept {
+    void Enter() {
         // This function can raise EXCEPTION_POSSIBLE_DEADLOCK if a wait
-        // operation
-        // on the critical section times out.
+        // operation on the critical section times out.
         // But Microsoft says to not handle the deadlock exception; instead,
-        // debug
-        // the application.
+        // debug the application.
         ::EnterCriticalSection(&cs_);
     }
 
-    void Leave() noexcept {
+    void Leave() {
         ::LeaveCriticalSection(&cs_);
     }
 
-    bool TryEnter() noexcept {
+    bool TryEnter() {
         return ::TryEnterCriticalSection(&cs_) != FALSE;
     }
 
